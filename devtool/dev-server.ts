@@ -1,8 +1,8 @@
-import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-
 import webpack from 'webpack'
 import webpackDevServer from 'webpack-dev-server'
+
+import ProConfig from '../webpack.config'
 
 const config: webpack.Configuration = {
   mode: 'development',
@@ -22,27 +22,16 @@ const config: webpack.Configuration = {
       title: 'Hot Module Replacement',
     }),
   ],
-  output: {
-    filename: `main.js`,
-    path: path.resolve(__dirname, 'dist'),
-    clean: true,
-  },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-    ],
-  }
-};
-const compiler = webpack(config);
+  output: ProConfig.output,
+  module: ProConfig.module,
+  resolve: ProConfig.resolve
+}
+const compiler = webpack(config)
 
 // `hot` and `client` options are disabled because we added them manually
 const server = new webpackDevServer({ hot: false, client: false }, compiler);
 
 (async () => {
-  await server.start();
-  console.log('dev server is running');
-})();
+  await server.start()
+  console.log('dev server is running')
+})()
