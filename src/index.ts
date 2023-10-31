@@ -1,32 +1,42 @@
 class HiElement extends HTMLElement {
   static elementName = 'hi-element'
-  child: HTMLHeadElement
+  contentChild: HTMLHeadElement
+  buttonChild: HTMLButtonElement
 
   number: number = 0
 
   constructor() {
     super()
-    this.child = document.createElement('h1')
+    this.contentChild = document.createElement('h1')
+    this.buttonChild = document.createElement('button')
+    this.buttonChild.innerText = 'click me'
+    this.buttonChild.onclick = () => {
+      this.number += 1
+      this.update()
+    }
   }
 
   render() {
     this.className = 'someclass'
-    this.update()
-    this.appendChild(this.child)
+    this.setStaticContent()
+    this.appendChild(this.contentChild)
+    this.appendChild(this.buttonChild)
+  }
+
+  setStaticContent() {
+    this.contentChild.innerText = `Hello ${this.number}`
+  }
+
+  setStateContent() {
+    this.contentChild.innerText = `Hello ${this.number}`
   }
 
   update() {
-    this.child.innerText = this.number.toString()
-  }
-
-  clickElment(): void {
-    this.number += 1
-    this.update()
+    this.setStateContent()
   }
 
   connectedCallback() {
     this.render()
-    this.onclick = this.clickElment
   }
 }
 
