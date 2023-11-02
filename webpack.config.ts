@@ -1,14 +1,12 @@
 import path from 'path'
-
 import webpack from 'webpack'
-
 
 const config: webpack.Configuration = {
   mode: 'production',
-  entry: './src/index.ts',
+  entry: './src/render/index.ts',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(new URL('.', import.meta.url).pathname, 'dist'),
     clean: true
   },
   module: {

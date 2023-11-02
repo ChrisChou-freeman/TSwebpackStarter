@@ -1,6 +1,6 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import webpack from 'webpack'
 import webpackDevServer from 'webpack-dev-server'
+import webpack from 'webpack'
 
 import ProConfig from '../webpack.config'
 
@@ -12,7 +12,7 @@ const config: webpack.Configuration = {
     // Dev server client for web socket transport, hot and live reload logic
     'webpack-dev-server/client/index.js?hot=true&live-reload=true',
     // Your entry
-    './src/index.ts',
+    './src/render/index.ts',
   ],
   devtool: 'inline-source-map',
   plugins: [
